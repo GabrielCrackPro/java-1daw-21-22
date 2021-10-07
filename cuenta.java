@@ -52,7 +52,7 @@ public class cuenta {
         System.out.print("Introduce el numero de la cuenta: ");
         String numero = sc.nextLine();
         System.out.print("Introduce el interes de la cuenta: ");
-        double interes = sc.nextDouble(); // El interés debe ser de tipo float porque no es un numero entero y no double
+        double interes = sc.nextDouble();
         System.out.print("Introduce el saldo de la cuenta: ");
         double saldo = sc.nextDouble();
         cuenta cuenta1 = new cuenta(nombre, numero, interes, saldo);
