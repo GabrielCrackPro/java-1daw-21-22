@@ -37,7 +37,8 @@ public class cuenta {
     // Metodo para transferir dinero de una cuenta a otra
     public void transferir(cuenta origen, cuenta destino, double cantidad) {
         if (cantidad > 0) {
-            System.out.println("Transfiriendo " + cantidad + "€ de " + origen.nombre + " a " + destino.nombre + "...");
+            System.out.println(
+                    "Transfiriendo " + cantidad + "€ de " + "#" + origen.numero + " a " + "#" + destino.numero + "...");
             saldo -= cantidad;
             destino.saldo += cantidad;
             System.out.println("Transferencia realizada");
