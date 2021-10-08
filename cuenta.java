@@ -6,10 +6,23 @@ public class cuenta {
     private double interes;
     private double saldo;
 
-    public cuenta(String nombre, String numero, double interes, double saldo) {
+    public cuenta() {
+    } // constructor vacio
+
+    // Setters de la clase cuenta
+    public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public void setInteres(double interes) {
         this.interes = interes;
+    }
+
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
@@ -56,10 +69,22 @@ public class cuenta {
         double interes = sc.nextDouble();
         System.out.print("Introduce el saldo de la cuenta: ");
         double saldo = sc.nextDouble();
-        cuenta cuenta1 = new cuenta(nombre, numero, interes, saldo);
+        cuenta cuenta1 = new cuenta();
+
+        cuenta1.setNombre(nombre);
+        cuenta1.setNumero(numero);
+        cuenta1.setInteres(interes);
+        cuenta1.setSaldo(saldo);
         cuenta1.ver();
-        cuenta cuenta2 = new cuenta("Juan Ferrández Rubio", "12345678901234567890", 1.75, 300);
+
+        cuenta cuenta2 = new cuenta();
+        cuenta2.setNombre("Juan Ferrández Rubio");
+        cuenta2.setNumero("12345678901234567890");
+        cuenta2.setInteres(1.75);
+        cuenta2.setSaldo(300);
+
         cuenta cuenta3 = cuenta2;
+
         System.out.print("Introduce la cantidad a ingresar en " + "#" + cuenta1.numero + ": ");
         double cantidad = sc.nextDouble();
         cuenta1.ingreso(cantidad);
