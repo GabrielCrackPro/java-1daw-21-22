@@ -1,13 +1,41 @@
+/*
+Enunciado:
+
+Escribe una clase Cuenta para representar una cuenta bancaria.
+Los datos de la cuenta son: 
+ - Nombre del cliente (String),
+ - Número de cuenta (String), 
+ - Tipo de interés (double)
+ - Saldo (double).		
+La clase contendrá los siguientes métodos:
+ - Constructor por defecto
+ - Constructor con todos los parámetros
+ - Métodos setters/getters
+ - Métodos ingreso y reintegro.
+ - Método transferencia que permita pasar dinero de una cuenta a otra
+En el main ejecutar las siguientes operaciones:
+ - Crear una cuenta con el constructor vacio y meter los datos por teclado.
+ - Crear una cuenta con el constructor con los parámetros ("Juan Ferrández Rubio", "12345678901234567890", 1.75, 300)
+ - Se crea cuenta3 como copia de cuenta1
+ - Mostrar los datos de cuenta1
+ - Se realiza un ingreso en cuenta1
+ - Mostrar el saldo de cuenta1 después del ingreso
+ - Mostrar los datos de cuenta2
+ - Mostrar los datos de cuenta3
+ - Realizar una transferencia de 10€ desde cuenta3 a cuenta2
+ - Mostrar el saldo de cuenta2
+ - Mostrar el saldo de cuenta3
+*/
+
 import java.util.Scanner;
 
 public class cuenta {
-    // Colores para el texto
     /*
      * === USO DE COLORES === Para utilizar un color se debe concatenar el con el
      * texto al inicio de la cadena y al final para resetrarlo Por ejemplo:
      * System.out.println("\033[31m" + "Texto en rojo" + "\033[0m");
      */
-
+    // Colores
     public static final String red = "\u001B[31m";
     public static final String green = "\u001B[32m";
     public static final String yellow = "\u001B[33m";
