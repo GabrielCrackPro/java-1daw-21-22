@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class cuenta {
     // Colores para el texto
+    /*
+     * === USO DE COLORES === Para utilizar un color se debe concatenar el con el
+     * texto al inicio de la cadena y al final para resetrarlo Por ejemplo:
+     * System.out.println("\033[31m" + "Texto en rojo" + "\033[0m");
+     */
+
     public static final String red = "\u001B[31m";
     public static final String green = "\u001B[32m";
     public static final String yellow = "\u001B[33m";
