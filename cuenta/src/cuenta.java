@@ -1,141 +1,158 @@
-/*
-Enunciado:
-
-Escribe una clase Cuenta para representar una cuenta bancaria.
-Los datos de la cuenta son: 
- - Nombre del cliente (String),
- - Número de cuenta (String), 
- - Tipo de interés (double)
- - Saldo (double).		
-La clase contendrá los siguientes métodos:
- - Constructor por defecto
- - Constructor con todos los parámetros
- - Métodos setters/getters
- - Métodos ingreso y reintegro.
- - Método transferencia que permita pasar dinero de una cuenta a otra
-En el main ejecutar las siguientes operaciones:
- - Crear una cuenta con el constructor vacio y meter los datos por teclado.
- - Crear una cuenta con el constructor con los parámetros ("Juan Ferrández Rubio", "12345678901234567890", 1.75, 300)
- - Se crea cuenta3 como copia de cuenta1
- - Mostrar los datos de cuenta1
- - Se realiza un ingreso en cuenta1
- - Mostrar el saldo de cuenta1 después del ingreso
- - Mostrar los datos de cuenta2
- - Mostrar los datos de cuenta3
- - Realizar una transferencia de 10€ desde cuenta3 a cuenta2
- - Mostrar el saldo de cuenta2
- - Mostrar el saldo de cuenta3
-*/
-
 import java.util.Scanner;
 
-public class cuenta {
-    /*
-     * === USO DE COLORES === Para utilizar un color se debe concatenar el con el
-     * texto al inicio de la cadena y al final para resetrarlo Por ejemplo:
-     * System.out.println("\033[31m" + "Texto en rojo" + "\033[0m");
-     */
-    // Colores
-    public static final String red = "\u001B[31m";
-    public static final String green = "\u001B[32m";
-    public static final String yellow = "\u001B[33m";
-    public static final String blue = "\u001B[34m";
-    public static final String reset = "\u001B[0m"; // volver al color inicial
+public class Cuenta {
 
-    private String nombre;
-    private String numero;
-    private double interes;
+    private String nombreCliente;
+    private String numeroCuenta;
+    private double tipoInteres;
     private double saldo;
 
-    public cuenta() {
+    public Cuenta() {
+    } // constructor vacio
+
+    double entradaDinero;
+    double salidaDinero;
+    double transferenciaDinero;
+
+    // constructor con parámetros
+    public Cuenta(String nombreCliente, String numeroCuenta, double tipoInteres, double saldo) {
+        this.nombreCliente = nombreCliente;
+        this.numeroCuenta = numeroCuenta;
+        this.tipoInteres = tipoInteres;
+        this.saldo = saldo;
     }
 
-    // Setters de la clase cuenta
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    // Constructor copia
+    public Cuenta(Cuenta cuenta) {
+        this.nombreCliente = cuenta.nombreCliente;
+        this.numeroCuenta = cuenta.numeroCuenta;
+        this.tipoInteres = cuenta.tipoInteres;
+        this.saldo = cuenta.saldo;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    // Setters
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
-    public void setInteres(double interes) {
-        this.interes = interes;
+    public void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
     }
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    // Metodo para mostrar los datos de la cuenta
-    public String ver() {
-        return green + "[ i ] El nombre de la cuenta es " + nombre + " el numero es " + numero + " el interes es "
-                + interes + " el saldo es " + saldo + " € \n" + reset;
+    public void setTipoInteres(double tipoInteres) {
+        this.tipoInteres = tipoInteres;
     }
 
-    // Metodo para ingresar dinero a la cuenta
-    public void ingreso(double cantidad) {
-        if (cantidad > 0) {
-            saldo += cantidad; // suma la cantidad a la cuenta
+    // Getters
+    public String getNombre() {
+        return this.nombreCliente;
+    }
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public double getTipoInteres() {
+        return tipoInteres;
+    }
+
+    // Método para ingresar dinero
+    public void ingreso(double entradaDinero) {
+        if (entradaDinero > 0) {
+            saldo += entradaDinero;
             System.out.println(
-                    green + "[ i ] Se han ingresado " + cantidad + " € a la cuenta " + "#" + this.numero + reset);
+                    "Se han ingresado " + entradaDinero + " € en la cuenta número " + this.numeroCuenta + "\n");
         } else {
-            System.out.println(red + "[ x ] No se puede ingresar una cantidad negativa" + reset);
+            System.out.println("Se ha producido un error al intentar ingresar " + entradaDinero
+                    + " € en la cuenta número " + this.numeroCuenta);
+            System.out.println("Por favor, revisa la cantidad que quieres ingresar y vuelve a intentarlo, gracias");
         }
     }
 
-    // Metodo para retirar dinero de la cuenta
-    public void reintegro(double cantidad) {
-        saldo -= cantidad; // resta la cantidad a la cuenta
+    // Método para retirar dinero
+    public void reintegro(double salidaDinero) {
+        if (salidaDinero > 0 && salidaDinero >= saldo) {
+            saldo -= salidaDinero;
+            System.out.println("Se han retirado correctamente la cantidad de " + salidaDinero
+                    + " € en la cuenta número + " + this.numeroCuenta);
+        } else {
+            System.out.println("Se ha producido un error al intentar retirar " + salidaDinero
+                    + " € en la cuenta número " + this.numeroCuenta);
+            System.out.println("Por favor, revisa la cantidad que quieres retirar y vuelve a intentarlo, gracias");
+        }
     }
 
-    // Metodo para transferir dinero de una cuenta a otra
-    public void transferir(cuenta origen, cuenta destino, double cantidad) {
-        if (cantidad > 0) {
-            System.out.println(green + "[ i ] Transfiriendo " + cantidad + "€ de " + "#" + origen.numero + " a " + "#"
-                    + destino.numero + "..." + reset);
-            saldo -= cantidad;
-            destino.saldo += cantidad;
-            System.out.println(green + "[ i ] Transferencia realizada" + reset);
+    // Método para transferir dinero
+    public void transferencia(Cuenta cuentaOrigen, Cuenta cuentaDestino, double transferenciaDinero) {
+        if (cuentaOrigen.saldo > transferenciaDinero) {
+            cuentaOrigen.saldo -= transferenciaDinero;
+            cuentaDestino.saldo += transferenciaDinero;
+            System.out.println(
+                    "Se ha transferido correctamente la cantidad de " + transferenciaDinero + " €, desde la cuenta "
+                            + cuentaOrigen.numeroCuenta + " hasta la cuenta " + cuentaDestino.numeroCuenta);
+
+        } else {
+            System.out.println("No hay dinero suficiente para realizar la operación");
         }
     }
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.print(blue + "[ ? ] Introduce el nombre de la cuenta: " + reset);
-        String nombre = sc.nextLine();
-        System.out.print(blue + "[ ? ] Introduce el numero de la cuenta: " + reset);
-        String numero = sc.nextLine();
-        System.out.print(blue + "[ ? ] Introduce el interes de la cuenta: " + reset);
-        double interes = sc.nextDouble();
-        System.out.print(blue + "[ ? ] Introduce el saldo de la cuenta: " + reset);
-        double saldo = sc.nextDouble();
-        cuenta cuenta1 = new cuenta();
+        // Crear una Cuenta con el constructor vacio y meter los datos por teclado
+        Cuenta cuenta1 = new Cuenta();
 
-        cuenta1.setNombre(nombre);
-        cuenta1.setNumero(numero);
-        cuenta1.setInteres(interes);
-        cuenta1.setSaldo(saldo);
-        cuenta1.ver();
+        System.out.println("Introduce el nombre del titular de la cuenta");
+        String nombreTitular = sc.nextLine();
+        cuenta1.setNombreCliente(nombreTitular);
 
-        cuenta cuenta2 = new cuenta();
-        cuenta2.setNombre("Juan Ferrández Rubio");
-        cuenta2.setNumero("12345678901234567890");
-        cuenta2.setInteres(1.75);
-        cuenta2.setSaldo(300);
+        System.out.println("Introduce el número de la cuenta");
+        String numeroCuenta = sc.nextLine();
+        cuenta1.setNumeroCuenta(numeroCuenta);
 
-        cuenta cuenta3 = cuenta2;
+        System.out.println("Introduce el tipo de interés");
+        double tipoInteres = sc.nextDouble();
+        cuenta1.setTipoInteres(tipoInteres);
 
-        System.out.print(blue + "[ ? ] Introduce la cantidad a ingresar en " + "#" + cuenta1.numero + ": " + reset);
-        double cantidad = sc.nextDouble();
-        cuenta1.ingreso(cantidad);
-        cuenta1.ver();
-        cuenta2.ver();
-        cuenta3.ver();
-        cuenta3.transferir(cuenta3, cuenta2, 10.0);
+        System.out.println("Introduce el saldo de la cuenta");
+        double saldoCuenta = sc.nextDouble();
+        cuenta1.setSaldo(saldoCuenta);
+        Cuenta cuenta2 = new Cuenta("Juan Ferrández Rubio", "12345678901234567890", 1.75, 300);
+
+        Cuenta cuenta3 = new Cuenta();
+        cuenta3 = new Cuenta(cuenta1);
+
+        System.out.println("Compruebo la cuenta3: ");
+        System.out.println("* El titular de la cuenta es: " + cuenta3.getNombre());
+        System.out.println("* El número de cuenta es: " + cuenta3.getNumeroCuenta());
+        System.out.println("* El interés es del: " + cuenta3.getTipoInteres() + "%");
+        System.out.println("* El saldo es: " + cuenta3.getSaldo() + " €");
+
+        System.out.println("\nLos datos de la cuenta " + cuenta1.getNumeroCuenta() + " son:");
+        System.out.println("* El titular de la cuenta es: " + cuenta1.getNombre());
+        System.out.println("* El número de cuenta es: " + cuenta1.getNumeroCuenta());
+        System.out.println("* El interés es del: " + cuenta1.getTipoInteres() + "%");
+        System.out.println("* El saldo es: " + cuenta1.getSaldo() + " €\n");
+
+        cuenta1.ingreso(10000);
+        System.out
+                .println("El saldo de la cuenta " + cuenta1.getNumeroCuenta() + " es de: " + cuenta1.getSaldo() + " €");
+
+        System.out.println("\nLos datos de la cuenta " + cuenta2.getNumeroCuenta() + " son:");
+        System.out.println("* El titular de la cuenta es: " + cuenta2.getNombre());
+        System.out.println("* El número de cuenta es: " + cuenta2.getNumeroCuenta());
+        System.out.println("* El interés es del: " + cuenta2.getTipoInteres() + "%");
+        System.out.println("* El saldo es: " + cuenta2.getSaldo() + " €\n");
 
         sc.close();
     }
-
 }
