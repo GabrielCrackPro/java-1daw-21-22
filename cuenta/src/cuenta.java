@@ -154,5 +154,6 @@ public class Cuenta {
         System.out.println("* El saldo es: " + cuenta2.getSaldo() + " €\n");
 
         sc.close();
+
     }
 }
