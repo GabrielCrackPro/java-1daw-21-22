@@ -1,3 +1,30 @@
+/*
+Enunciado:
+La clase Punto contendrá las siguientes partes:
+- Dos atributos privados de tipo double, que representarán las coordenadas x e y del punto.
+- Un constructor que reciba como parámetro las coordenadas x e y del punto.
+- Un método getter y setter para cada uno de los atributos.
+- Un método toString que devuelva un String con las coordenadas del punto.
+- Un método distancia que devuelva la distancia entre dos puntos.
+- Un método que se aplique sobre un punto y devuelva la distancia entre el y otro
+- Un metodo que devyelve el area del triangulo formado por tres puntos.
+- Un método que imprime el punto en el formato (x,y)
+- El método toString debe devolver el punto en el formato (x,y)
+
+El método main debe contener lo siguiente:
+- Crea 6 objetos de la clase Punto(p1,p2,p3,p4,p5,p6)
+- Con el constructor vacio crea p1 con los valores (3,4) e imprimes el resultado
+- Creas p2 con los valores (7,4) e imprimes el resultado con el metodo imprimePunto
+- Creas p3 partiendo del constructor copia pasandole los valores de p1 
+lo modificas posteriormente con los valores (3,7)
+lo imprimes con el metodo imprimePunto
+- Calcula la distancia entre p1 y p2 e imprime el resultado
+- Crea los puntos p4,p5 y p6 con el construcyotr vacio psaandole los valores por teclado
+- Ejecuta el metodo imprimeArea con los puntos p4,p5 y p6
+- Imprime el numero de puntos creados
+
+*/
+
 import java.util.Scanner;
 
 public class Punto {
@@ -107,6 +134,7 @@ public class Punto {
         System.out.print("Introduce la x del punto 6: ");
         p6.setX(sc.nextDouble());
         System.out.print("Introduce la y del punto 6: ");
+        p6.setY(sc.nextDouble());
 
         // Area del triangulo formado por los tres puntos
         System.out.println("El area del triangulo formado por los tres puntos es: " + AreaTriangulo(p4, p5, p6));
